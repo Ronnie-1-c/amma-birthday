@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Mom</title>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+font-family:Segoe UI;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(270deg,#ff6a88,#ff99ac,#a18cd1);
+background-size:600% 600%;
+animation:bgmove 10s infinite;
+overflow:hidden;
+color:white;
+text-align:center;
+}
+
+@keyframes bgmove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+/* HEADER */
+
+.headerDecor{
+position:absolute;
+top:0;
+width:100%;
+height:120px;
+overflow:hidden;
+}
+
+.flags{
+display:flex;
+justify-content:center;
+gap:15px;
+}
+
+.flag{
+width:35px;
+height:45px;
+clip-path:polygon(50% 100%,0 0,100% 0);
+animation:wave 2s infinite;
+}
+
+.flag:nth-child(odd){background:#ff4d6d;}
+.flag:nth-child(even){background:#ffd24d;}
+
+@keyframes wave{
+0%{transform:rotate(0)}
+50%{transform:rotate(10deg)}
+100%{transform:rotate(0)}
+}
+
+.sparkles{
+position:absolute;
+width:100%;
+height:120px;
+background-image:radial-gradient(white 2px,transparent 2px);
+background-size:60px 60px;
+opacity:.4;
+animation:sparkMove 10s linear infinite;
+}
+
+@keyframes sparkMove{
+0%{background-position:0 0}
+100%{background-position:200px 200px}
+}
+
+/* GLASS CARD */
+
+.glass{
+padding:50px;
+border-radius:25px;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(18px);
+box-shadow:0 20px 60px rgba(0,0,0,0.35);
+animation:float 4s infinite;
+z-index:2;
+}
+
+@keyframes float{
+50%{transform:translateY(-10px)}
+}
+
+h1{
+font-size:55px;
+text-shadow:0 0 20px white;
+}
+
+button{
+margin-top:25px;
+padding:14px 32px;
+font-size:18px;
+border:none;
+border-radius:35px;
+background:linear-gradient(45deg,#ff4081,#ff6ec4);
+color:white;
+cursor:pointer;
+}
+
+/* BALLOONS */
+
+.balloon{
+position:absolute;
+bottom:-120px;
+width:70px;
+height:90px;
+border-radius:50% 50% 45% 45%;
+}
+
+.balloon::after{
+content:"";
+position:absolute;
+width:2px;
+height:70px;
+background:white;
+top:90px;
+left:50%;
+}
+
+.red{background:#ff4d6d; animation:up 12s linear infinite;}
+.blue{background:#4da6ff; animation:diag 14s linear infinite;}
+.yellow{background:#ffd24d; animation:up 10s linear infinite;}
+.green{background:#66ff99; animation:left 13s linear infinite;}
+.purple{background:#c77dff; animation:diag 11s linear infinite;}
+.pink{background:#ff66cc; animation:right 15s linear infinite;}
+
+@keyframes up{
+100%{transform:translateY(-120vh)}
+}
+
+@keyframes diag{
+100%{transform:translate(120px,-120vh)}
+}
+
+@keyframes left{
+100%{transform:translate(-120px,-120vh)}
+}
+
+@keyframes right{
+100%{transform:translate(150px,-120vh)}
+}
+
+/* GALLERY PAGE */
+
+.galleryPage{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+animation:blink .8s;
+}
+
+@keyframes blink{
+0%{opacity:0}
+100%{opacity:1}
+}
+
+.photo{
+width:450px;
+height:450px;
+object-fit:cover;
+border-radius:25px;
+opacity:0;
+transform:scale(.8);
+transition:1s;
+}
+
+.show{
+opacity:1;
+transform:scale(1);
+}
+
+/* FINAL PAGE */
+
+.finalPage{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:linear-gradient(135deg,#ff6a88,#ff99ac,#fad0c4);
+animation:blink 1s;
+overflow:hidden;
+}
+
+.loveText{
+font-size:70px;
+text-shadow:0 0 20px white,0 0 40px #ff4d6d;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+50%{transform:scale(1.1)}
+}
+
+/* HEARTS */
+
+.heart{
+position:absolute;
+width:30px;
+height:30px;
+background:red;
+transform:rotate(45deg);
+animation:floatHeart 8s linear infinite;
+}
+
+.heart::before,.heart::after{
+content:"";
+position:absolute;
+width:30px;
+height:30px;
+background:red;
+border-radius:50%;
+}
+
+.heart::before{top:-15px;}
+.heart::after{left:-15px;}
+
+.heart:nth-child(1){left:10%}
+.heart:nth-child(2){left:25%}
+.heart:nth-child(3){left:40%}
+.heart:nth-child(4){left:60%}
+.heart:nth-child(5){left:75%}
+.heart:nth-child(6){left:90%}
+
+@keyframes floatHeart{
+0%{transform:translateY(100vh) rotate(45deg)}
+100%{transform:translateY(-120vh) rotate(45deg)}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="headerDecor">
+<div class="sparkles"></div>
+<div class="flags">
+<div class="flag"></div><div class="flag"></div><div class="flag"></div>
+<div class="flag"></div><div class="flag"></div><div class="flag"></div>
+<div class="flag"></div><div class="flag"></div>
+</div>
+</div>
+
+<!-- BALLOONS -->
+<div class="balloon red" style="left:8%"></div>
+<div class="balloon blue" style="left:20%"></div>
+<div class="balloon yellow" style="left:35%"></div>
+<div class="balloon green" style="left:55%"></div>
+<div class="balloon purple" style="left:70%"></div>
+<div class="balloon pink" style="left:88%"></div>
+
+<!-- MAIN PAGE -->
+
+<div class="glass" id="home">
+
+<h1>HAPPY BIRTHDAY AMMA 🎂</h1>
+
+<img src="mom.jpeg" style="margin:20px;border-radius:50%;height:150px;width:150px">
+
+<p>You are the heart of our family and the light of my life.</p>
+
+<button onclick="startShow()">Celebrate 🎉</button>
+
+</div>
+
+<!-- GALLERY -->
+
+<div class="galleryPage" id="galleryPage">
+
+<h1>Our Beautiful Memories ❤️</h1>
+
+<img id="photo" class="photo">
+
+</div>
+
+<!-- FINAL PAGE -->
+
+<div class="finalPage" id="finalPage">
+
+<h1 class="loveText">Love You Amma ❤️</h1>
+
+<div class="heart"></div>
+<div class="heart"></div>
+<div class="heart"></div>
+<div class="heart"></div>
+<div class="heart"></div>
+<div class="heart"></div>
+<div class="heart"></div>
+
+</div>
+
+<script>
+
+let photos=[
+"mom1.jpeg","mom2.jpeg","mom3.jpeg","mom4.jpeg","mom5.jpeg",
+"mom6.jpeg","mom7.jpeg","mom8.jpeg","mom9.jpeg","mom10.jpeg",
+"mom11.jpeg","mom12.jpeg","mom13.jpeg","mom14.jpeg","mom15.jpeg",
+"mom16.jpeg","mom17.jpeg","mom18.jpeg","mom19.jpeg","mom20.jpeg",
+"mom21.jpeg","mom22.jpeg","mom23.jpeg","mom24.jpeg","mom25.jpeg",
+"mom26.jpeg","mom27.jpeg","mom28.jpeg","mom29.jpeg","mom30.jpeg",
+"mom31.jpeg","mom32.jpeg","mom33.jpeg","mom34.jpeg"
+];
+
+let index=0;
+
+function blast(){
+confetti({particleCount:120,angle:60,spread:70,origin:{x:0}});
+confetti({particleCount:120,angle:120,spread:70,origin:{x:1}});
+}
+
+function startShow(){
+blast();
+setTimeout(()=>{
+document.getElementById("home").style.display="none";
+document.getElementById("galleryPage").style.display="flex";
+showNext();
+},1200);
+}
+
+function showNext(){
+
+if(index>=photos.length){
+setTimeout(()=>{
+document.getElementById("galleryPage").style.display="none";
+document.getElementById("finalPage").style.display="flex";
+},1000);
+return;
+}
+
+let img=document.getElementById("photo");
+img.classList.remove("show");
+
+setTimeout(()=>{
+img.src=photos[index];
+img.classList.add("show");
+blast();
+index++;
+setTimeout(showNext,2200);
+},300);
+
+}
+
+</script>
+
+</body>
+</html>
